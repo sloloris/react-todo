@@ -13,13 +13,21 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['react', 'es2015', 'es2016', 'stage-0']
-      }
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015', 'es2016', 'stage-0']
+        }
+      },
+      {
+        test: /\.css$/, 
+        loader: ExtractTextPlugin.extract('css-loader')
+      },
+      {test:/\.png$/, loader: 'url-loader?limit=100000'}
+    ],
   },
   resolve: {
     extensions: ['*', '.js', '.jsx']
