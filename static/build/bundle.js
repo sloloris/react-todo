@@ -10369,6 +10369,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
@@ -10380,6 +10382,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 var _HelloWorld = __webpack_require__(51);
 
 var _HelloWorld2 = _interopRequireDefault(_HelloWorld);
+
+var _classnames = __webpack_require__(189);
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10394,25 +10400,77 @@ __webpack_require__(89);
 var TodoList = function (_Component) {
   _inherits(TodoList, _Component);
 
-  function TodoList() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function TodoList(props) {
     _classCallCheck(this, TodoList);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call.apply(_ref, [this].concat(args))), _this), _this.render = function () {
+    _this._onClickNewTask = function (event) {
+      _this.setState(_extends({}, _this.state, {
+        displayAddField: true
+      }));
+    };
+
+    _this._onClickCancel = function (event) {
+      _this.setState(_extends({}, _this.state, {
+        displayAddField: false
+      }));
+    };
+
+    _this._onClickAddTask = function (event) {
+      _this.setState(_extends({}, _this.state, {
+        todos: _this.state.todos.push(event.target.value),
+        displayAddField: false
+      }));
+    };
+
+    _this._onChangeTaskInput = function (event) {
+      _this.setState(_extends({}, _this.state, {
+        taskText: event.target.value
+      }));
+    };
+
+    _this.render = function () {
+      var addNewTaskClass = (0, _classnames2.default)({ 'no-display': !_this.state.displayAddField });
       return _react2.default.createElement(
         'div',
         { className: 'todo-list-container' },
         'you have entered TodoList',
-        _react2.default.createElement(_HelloWorld2.default, null)
+        _react2.default.createElement(
+          'div',
+          { className: 'btn btn-new-task',
+            onClick: _this._onClickNewTask },
+          'New Task'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: addNewTaskClass },
+          _react2.default.createElement(
+            'div',
+            { className: 'btn btn-cancel',
+              onClick: _this._onClickCancel },
+            'Cancel'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'btn btn-add-task',
+              onClick: _this._onClickAddTask },
+            'Add Task'
+          ),
+          _react2.default.createElement('textarea', {
+            className: 'new-task-field',
+            value: _this.state.taskText,
+            onChange: _this._onChangeTaskInput })
+        )
       );
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    };
+
+    _this.state = {
+      todos: [],
+      displayAddField: false,
+      taskText: ''
+    };
+    return _this;
   }
 
   return TodoList;
@@ -22629,6 +22687,61 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
 
 /***/ })
 /******/ ]);
