@@ -12,7 +12,7 @@ class TodoList extends Component {
     this.state = {
       todos: [],
       displayAddField: false,
-      taskText: ''
+      taskInputText: ''
     }
   }
 
@@ -31,9 +31,11 @@ class TodoList extends Component {
   }
 
   _onClickAddTask = (event) => {
+    var newTodos = this.state.todos.slice()
+    newTodos.push(this.state.taskInputText)
     this.setState({
       ...this.state,
-      todos: this.state.todos.push(event.target.value),
+      todos: newTodos,
       displayAddField: false
     })
   }
@@ -46,6 +48,7 @@ class TodoList extends Component {
   }
 
   render = () => {
+    console.log(this.state.todos)
     var addNewTaskClass = classnames({ 'no-display': !this.state.displayAddField })
     return (
     <div className='todo-list-container'>
@@ -61,13 +64,14 @@ class TodoList extends Component {
         </div>
         <div className='btn btn-add-task' 
           onClick={ this._onClickAddTask }>
-          Add Task
+          Add
         </div>
         <textarea 
           className='new-task-field'
-          value={ this.state.taskText }
+          value={ this.state.taskInputText }
           onChange={ this._onChangeTaskInput } />
       </div>
+      { this.state.todos }
     </div>
       
     )

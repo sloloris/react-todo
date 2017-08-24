@@ -10418,8 +10418,10 @@ var TodoList = function (_Component) {
     };
 
     _this._onClickAddTask = function (event) {
+      var newTodos = _this.state.todos.slice();
+      newTodos.push(_this.state.taskInputText);
       _this.setState(_extends({}, _this.state, {
-        todos: _this.state.todos.push(event.target.value),
+        todos: newTodos,
         displayAddField: false
       }));
     };
@@ -10431,6 +10433,7 @@ var TodoList = function (_Component) {
     };
 
     _this.render = function () {
+      console.log(_this.state.todos);
       var addNewTaskClass = (0, _classnames2.default)({ 'no-display': !_this.state.displayAddField });
       return _react2.default.createElement(
         'div',
@@ -10455,20 +10458,21 @@ var TodoList = function (_Component) {
             'div',
             { className: 'btn btn-add-task',
               onClick: _this._onClickAddTask },
-            'Add Task'
+            'Add'
           ),
           _react2.default.createElement('textarea', {
             className: 'new-task-field',
-            value: _this.state.taskText,
+            value: _this.state.taskInputText,
             onChange: _this._onChangeTaskInput })
-        )
+        ),
+        _this.state.todos
       );
     };
 
     _this.state = {
       todos: [],
       displayAddField: false,
-      taskText: ''
+      taskInputText: ''
     };
     return _this;
   }
