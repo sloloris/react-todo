@@ -43,7 +43,7 @@ class TodoList extends Component {
   _onChangeTaskInput = (event) => {
     this.setState({
       ...this.state,
-      taskText: event.target.value
+      taskInputText: event.target.value
     })
   }
 

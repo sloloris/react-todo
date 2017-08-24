@@ -10428,7 +10428,7 @@ var TodoList = function (_Component) {
 
     _this._onChangeTaskInput = function (event) {
       _this.setState(_extends({}, _this.state, {
-        taskText: event.target.value
+        taskInputText: event.target.value
       }));
     };
 
