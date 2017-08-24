@@ -6,10 +6,13 @@ import classnames from 'classnames';
 
 class SingleTaskItem extends Component {
 
+  static propTypes = {
+    task: PropTypes.string.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      task: '',
       completed: false,
     }
   }

@@ -24,7 +24,7 @@ class ListDirectory extends Component {
   }
 
   _onClickDisplayList = (event) => {
-    
+
   }
 
   render = () => {

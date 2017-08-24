@@ -10435,7 +10435,7 @@ var TodoList = function (_Component) {
     _this._generateIndividualTaskItems = function (event) {
       var todos = _this.state.todos;
       return todos.map(function (todo, index) {
-        console.log(todo);
+        console.log(todo); // this prints correctly
         // error is where todo is not getting passed to SingleTaskItem component
         return _react2.default.createElement(
           'div',
@@ -22828,7 +22828,6 @@ var SingleTaskItem = function (_Component) {
     };
 
     _this.state = {
-      task: '',
       completed: false
     };
     return _this;
@@ -22837,6 +22836,9 @@ var SingleTaskItem = function (_Component) {
   return SingleTaskItem;
 }(_react.Component);
 
+SingleTaskItem.propTypes = {
+  task: _propTypes2.default.string.isRequired
+};
 exports.default = SingleTaskItem;
 
 /***/ }),
