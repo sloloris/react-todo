@@ -2,7 +2,7 @@ require('../../styles/todolist.css')
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import HelloWorld from './HelloWorld';
+import SingleTaskItem from './SingleTaskItem';
 import classnames from 'classnames';
 
 class TodoList extends Component {
@@ -47,6 +47,19 @@ class TodoList extends Component {
     })
   }
 
+  _generateIndividualTaskItems = (event) => {
+    var todos = this.state.todos
+    return todos.map((todo, index) => {
+      console.log(todo)
+      // error is where todo is not getting passed to SingleTaskItem component
+      return (
+        <div className='single-task-item' key={index}>
+          <SingleTaskItem task={todo} /> 
+        </div>
+      )
+    })
+  }
+
   render = () => {
     console.log(this.state.todos)
     var addNewTaskClass = classnames({ 'no-display': !this.state.displayAddField })
@@ -71,7 +84,10 @@ class TodoList extends Component {
           value={ this.state.taskInputText }
           onChange={ this._onChangeTaskInput } />
       </div>
-      { this.state.todos }
+      <div className='todo-item-list'>
+        task components should be generated here
+        { this._generateIndividualTaskItems() }
+      </div>
     </div>
       
     )

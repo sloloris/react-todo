@@ -10379,9 +10379,9 @@ var _propTypes = __webpack_require__(57);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _HelloWorld = __webpack_require__(51);
+var _SingleTaskItem = __webpack_require__(190);
 
-var _HelloWorld2 = _interopRequireDefault(_HelloWorld);
+var _SingleTaskItem2 = _interopRequireDefault(_SingleTaskItem);
 
 var _classnames = __webpack_require__(189);
 
@@ -10432,6 +10432,19 @@ var TodoList = function (_Component) {
       }));
     };
 
+    _this._generateIndividualTaskItems = function (event) {
+      var todos = _this.state.todos;
+      return todos.map(function (todo, index) {
+        console.log(todo);
+        // error is where todo is not getting passed to SingleTaskItem component
+        return _react2.default.createElement(
+          'div',
+          { className: 'single-task-item', key: index },
+          _react2.default.createElement(_SingleTaskItem2.default, { task: todo })
+        );
+      });
+    };
+
     _this.render = function () {
       console.log(_this.state.todos);
       var addNewTaskClass = (0, _classnames2.default)({ 'no-display': !_this.state.displayAddField });
@@ -10465,7 +10478,12 @@ var TodoList = function (_Component) {
             value: _this.state.taskInputText,
             onChange: _this._onChangeTaskInput })
         ),
-        _this.state.todos
+        _react2.default.createElement(
+          'div',
+          { className: 'todo-item-list' },
+          'task components should be generated here',
+          _this._generateIndividualTaskItems()
+        )
       );
     };
 
@@ -22746,6 +22764,86 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 }());
 
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(32);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(57);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(189);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+__webpack_require__(191);
+
+var SingleTaskItem = function (_Component) {
+  _inherits(SingleTaskItem, _Component);
+
+  function SingleTaskItem(props) {
+    _classCallCheck(this, SingleTaskItem);
+
+    var _this = _possibleConstructorReturn(this, (SingleTaskItem.__proto__ || Object.getPrototypeOf(SingleTaskItem)).call(this, props));
+
+    _this._onCheckMarkCompleted = function (event) {
+      // check if syntax of ternary operator is correct
+      completed == false ? _this.setState(_extends({}, _this.state, {
+        completed: true
+      })) : _this.setState(_extends({}, _this.state, {
+        completed: false
+      }));
+    };
+
+    _this.render = function () {
+      console.log('task = ', _this.state.task);
+      return _react2.default.createElement(
+        'div',
+        { className: 'task-item-container' },
+        '*insert checkbox here* ',
+        _this.state.task
+      );
+    };
+
+    _this.state = {
+      task: '',
+      completed: false
+    };
+    return _this;
+  }
+
+  return SingleTaskItem;
+}(_react.Component);
+
+exports.default = SingleTaskItem;
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
