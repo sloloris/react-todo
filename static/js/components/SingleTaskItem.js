@@ -7,40 +7,47 @@ import classnames from 'classnames';
 class SingleTaskItem extends Component {
 
   static propTypes = {
-    task: PropTypes.string.isRequired
+    task: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
-    task: "ERROR SAVING TASK"
+    task: "ERROR SAVING TASK",
+    completed: false,
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      completed: false,
+      completed: this.props.completed,
       task: this.props.task
     }
   }
 
-  _toggleCheckbox = (event) => {
+  _toggleCheckbox = () => {
     // check if syntax of ternary operator is correct
-    completed==false ? 
+    if (this.state.completed == false) {
       this.setState({
         ...this.state,
         completed: true
-      }) :
+      })
+      // var completedTask = this.state.task;
+      // completedTask.strike();
+    } else {
       this.setState({
         ...this.state,
         completed: false
       })
+    }
   }
 
 
   render = () => {
     console.log('task = ', this.state.task)
+    console.log('completed = ', this.state.completed)
     return(
       <div className='task-item-container'>
-        *insert checkbox here* { this.state.task }
+        <input id="checkbox" type="checkbox" onChange={this._toggleCheckbox} /> { this.state.task }
       </div>
       )
   }

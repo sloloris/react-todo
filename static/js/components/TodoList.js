@@ -50,8 +50,6 @@ class TodoList extends Component {
   _generateIndividualTaskItems = (event) => {
     var todos = this.state.todos
     return todos.map((todo, index) => {
-      console.log(todo) // this prints correctly
-      // error is where todo is not getting passed to SingleTaskItem component
       return (
         <div className='single-task-item' key={index}>
           <SingleTaskItem task={todo} /> 
