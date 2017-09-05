@@ -10,14 +10,19 @@ class SingleTaskItem extends Component {
     task: PropTypes.string.isRequired
   }
 
+  static defaultProps = {
+    task: "ERROR SAVING TASK"
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       completed: false,
+      task: this.props.task
     }
   }
 
-  _onCheckMarkCompleted = (event) => {
+  _toggleCheckbox = (event) => {
     // check if syntax of ternary operator is correct
     completed==false ? 
       this.setState({
